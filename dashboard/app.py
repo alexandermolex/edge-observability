@@ -24,7 +24,8 @@ st.caption("Live metrics from Raspberry Pi — weather + system health")
 def load_data():
     with engine.connect() as conn:
         df = pd.read_sql("SELECT * FROM observability ORDER BY timestamp DESC LIMIT 500", conn)
-    df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True)
+    df["timestamp"] = pd.to_datetime(df["timestamp"], utc=True, errors="coerce")
+    df = df.dropna(subset=["timestamp"])
     return df
 
 df = load_data()
