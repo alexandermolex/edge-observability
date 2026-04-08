@@ -17,7 +17,8 @@ st.set_page_config(
 )
 
 st.title("📡 Edge Observability Dashboard")
-st.caption("Live metrics from Raspberry Pi — weather + system health")
+st.caption("""Live metrics from Raspberry Pi — weather + system health
+           The weather data is gathered with Detroit as the location""")
 
 # --- LOAD DATA ---
 @st.cache_data(ttl=60)
