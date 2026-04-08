@@ -61,7 +61,7 @@ if not system_df.empty:
         system_df.set_index("timestamp")[["cpu_percent", "memory_percent", "disk_percent"]]
     )
 
-st.subheader("Weather Over Time")
+st.subheader("Weather Over Time (Detroit)")
 
 if not weather_df.empty:
     st.line_chart(
