@@ -7,7 +7,7 @@ import os
 
 # --- CONNECTION ---
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
+engine = create_engine(DATABASE_URL)
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -17,8 +17,7 @@ st.set_page_config(
 )
 
 st.title("📡 Edge Observability Dashboard")
-st.caption("""Live metrics from Raspberry Pi — weather + system health
-           The weather data is gathered with Detroit as the location""")
+st.caption("Live metrics from Raspberry Pi — weather + system health")
 
 # --- LOAD DATA ---
 @st.cache_data(ttl=60)
@@ -62,7 +61,7 @@ if not system_df.empty:
         system_df.set_index("timestamp")[["cpu_percent", "memory_percent", "disk_percent"]]
     )
 
-st.subheader("Weather Over Time (Detroit)")
+st.subheader("Weather Over Time")
 
 if not weather_df.empty:
     st.line_chart(
