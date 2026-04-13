@@ -5,13 +5,17 @@ import psycopg2
 from datetime import datetime, timezone
 from weather_collector import get_weather_data
 from system_collector import get_system_data
+from urllib.parse import urlparse
 
+
+url = urlparse("postgresql://neondb_owner:npg_t1hL3BXirRan@ep-wispy-feather-ajexwwa5-pooler.c-3.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
 DB_CONFIG = {
-    "host": "100.100.21.63",
-    "database": "observability",
-    "user": "piuser",
-    "password": "Lvl_zero",
-    "port": 5432
+    "host": url.hostname,
+    "database": url.path[1:],
+    "user": url.username,
+    "password": url.password,
+    "port": url.port,
+    "sslmode": "require"
 }
 
 def ensure_table(conn):
